@@ -311,18 +311,13 @@ public:
             {
                 for (auto& kp : i.commandManager->getKeyMappings()->getKeyPressesAssignedToCommand (i.itemID))
                 {
-                    if (kp != KeyPress::backspaceKey   // (adding these is annoying because it flashes the menu bar
-                         && kp != KeyPress::deleteKey) // every time you press the key while editing text)
-                    {
-                        juce_wchar key = kp.getTextCharacter();
+                    juce_wchar key = kp.getTextCharacter();
 
-                        if (key == 0)
-                            key = (juce_wchar) kp.getKeyCode();
+                    if (key == 0)
+                        key = (juce_wchar) kp.getKeyCode();
 
-                        [item setKeyEquivalent: juceStringToNS (String::charToString (key).toLowerCase())];
-                        [item setKeyEquivalentModifierMask: juceModsToNSMods (kp.getModifiers())];
-                    }
-
+                    [item setKeyEquivalent: juceStringToNS (String::charToString (key).toLowerCase())];
+                    [item setKeyEquivalentModifierMask: juceModsToNSMods (kp.getModifiers())];
                     break;
                 }
             }
