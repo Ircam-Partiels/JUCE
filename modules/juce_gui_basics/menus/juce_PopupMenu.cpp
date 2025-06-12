@@ -317,7 +317,7 @@ private:
             {
                 auto key = keypress.getTextDescriptionWithIcons();
 
-                if (shortcutKey.isNotEmpty())
+                if (key.isNotEmpty() && shortcutKey.isNotEmpty())
                     shortcutKey << ", ";
 
                 if (key.length() == 1 && key[0] < 128)
