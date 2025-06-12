@@ -493,6 +493,20 @@ struct MenuWindow final : public Component, private AsyncUpdater
                 ensureItemComponentIsVisible (**iter, targetPosition.getY() - windowPos.getY());
             }
         }
+        
+        if (auto visibleID = options.getVisibleSubMenuId())
+        {
+            for (auto* item : items)
+            {
+                if (item->item.itemID == visibleID)
+                {
+                    if (item->item.subMenu != nullptr)
+                        showSubMenuFor (item);
+                    
+                    break;
+                }
+            }
+        }
 
         resizeToBestWindowPos();
 
@@ -2204,6 +2218,11 @@ PopupMenu::Options PopupMenu::Options::withPreferredPopupDirection (PopupDirecti
 PopupMenu::Options PopupMenu::Options::withInitiallySelectedItem (int idOfItemToBeSelected) const
 {
     return with (*this, &Options::initiallySelectedItemId, idOfItemToBeSelected);
+}
+    
+PopupMenu::Options PopupMenu::Options::withVisibleSubMenu (int idOfSubMenuToBeVisible) const
+{
+    return with (*this, &Options::initiallyVisibleSubMenuId, idOfSubMenuToBeVisible);
 }
 
 PopupMenu::Options PopupMenu::Options::forSubmenu() const
