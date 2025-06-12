@@ -201,8 +201,7 @@ public:
 
     void menuCommandInvoked (MenuBarModel*, const ApplicationCommandTarget::InvocationInfo& info) override
     {
-        if ((info.commandFlags & ApplicationCommandInfo::dontTriggerVisualFeedback) == 0
-              && info.invocationMethod != ApplicationCommandTarget::InvocationInfo::fromKeyPress)
+        if ((info.commandFlags & ApplicationCommandInfo::dontTriggerVisualFeedback) == 0)
             if (auto* item = findMenuItemWithCommandID (getMainMenuBar(), info.commandID))
                 flashMenuBar ([item menu]);
     }
