@@ -573,6 +573,9 @@ public:
             it is opened.
         */
         [[nodiscard]] Options withInitiallySelectedItem (int idOfItemToBeSelected) const;
+        
+        /** Sets a submenu visible by default */
+        [[nodiscard]] Options withVisibleSubMenu (int idOfSubMenuToBeVisible) const;
 
         /** Returns a copy of these options with the target component set to null. The value of the
             top-level target component will not be changed.
@@ -655,12 +658,18 @@ public:
             @see withItemThatMustBeVisible
         */
         int getInitiallySelectedItemId() const noexcept              { return initiallySelectedItemId; }
+        
+        /** Gets the ID of the submenu that must be visible when the menu is initially shown.
+         
+         @see withVisibleSubMenu
+         */
+        int getVisibleSubMenuId() const noexcept              { return initiallyVisibleSubMenuId; }
 
     private:
         //==============================================================================
         Rectangle<int> targetArea;
         WeakReference<Component> targetComponent, parentComponent, componentToWatchForDeletion, topLevelTarget;
-        int visibleItemID = 0, minWidth = 0, minColumns = 1, maxColumns = 0, standardHeight = 0, initiallySelectedItemId = 0;
+        int visibleItemID = 0, minWidth = 0, minColumns = 1, maxColumns = 0, standardHeight = 0, initiallySelectedItemId = 0, initiallyVisibleSubMenuId = 0;
         bool isWatchingForDeletion = false;
         PopupDirection preferredPopupDirection = PopupDirection::downwards;
     };
